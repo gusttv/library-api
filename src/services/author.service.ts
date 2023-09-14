@@ -3,13 +3,24 @@ import { author } from '../types/author';
 
 class AuthorService {
   public async listAuthors(): Promise<author[]> {
-    return await db.author.findMany();
+    return await db.author.findMany({
+      select: {
+        id: true,
+        firstName: true,
+        lastName: true
+      }
+    });
   }
 
   public async getAuthor(id: number): Promise<author> {
     return await db.author.findUnique({
       where: {
         id
+      }, 
+      select: {
+        id: true,
+        firstName: true,
+        lastName: true
       }
     });
   }
@@ -20,7 +31,12 @@ class AuthorService {
       data: {
         firstName,
         lastName
-      }
+      }, 
+      select: {
+        id: true,
+        firstName: true,
+        lastName: true,
+      },
     });
   }
 
@@ -33,6 +49,19 @@ class AuthorService {
       data: {
         firstName,
         lastName
+      },
+      select: {
+        id: true,
+        firstName: true,
+        lastName: true,
+      },
+    });
+  }
+
+  public async deleteAuthor(id: number): Promise<void> {
+    await db.author.delete({
+      where: {
+        id
       }
     });
   }

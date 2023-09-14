@@ -1,6 +1,7 @@
 import express from 'express';
 import type { Request, Response } from 'express';
-import { authorRouter } from './routes';
+import { authorRouter } from './routes/author.routes';
+import { bookRouter } from './routes/book.routes';
 
 export class App {
   private app: express.Application;
@@ -17,7 +18,8 @@ export class App {
       res.send('Running...');
     });
 
-    this.app.use('/api', authorRouter );
+    this.app.use('/api/authors', authorRouter );
+    this.app.use('/api/books', bookRouter);
   }
 
   private middlewares(): void {
@@ -26,8 +28,8 @@ export class App {
     
   }
 
-  public listen(): void {
-    this.app.listen(3000, () => {
+  public listen(port: number): void {
+    this.app.listen(port, () => {
       console.log('Rodando na porta 3000');
     });
   }

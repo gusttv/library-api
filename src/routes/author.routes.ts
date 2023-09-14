@@ -16,5 +16,8 @@ authorRouter.post('/', authorController.createAuthor);
 // firstName, lastName
 authorRouter.put('/:id', authorController.updateAuthor);
 
+// delete an author
+authorRouter.delete('/:id', authorController.deleteAuthor);
+
 
 
