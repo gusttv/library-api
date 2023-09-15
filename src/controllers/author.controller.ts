@@ -47,8 +47,7 @@ class AuthorController {
   public async deleteAuthor(req: Request, res: Response): Promise<void> {
     const id = Number(req.params.id);
     try {
-      const deletedauthor = await authorService.deleteAuthor(id);
-      res.json(deletedauthor);
+      await authorService.deleteAuthor(id);
       res.status(204).json('Author has been deleted.');
     } catch(error) {
       res.status(500).json(error.message);
